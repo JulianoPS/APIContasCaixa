@@ -1,0 +1,29 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+
+# Visual Studio
+.vscode/
+*.csproj.user
+.vs/
+
+# Build
+bin/
+obj/
+
+# Docker
+*.env
+*.pid
+*.tar
+*.log
+*.db
+
+# Database
+*.mdf
+*.ldf
+
+# Others
+.env
+

@@ -1,0 +1,33 @@
+﻿version: '3.8'
+
+services:
+  apicaixa:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__BDCaixa=Host=postgres;Port=5432;Database=BDCaixa;Username=postgres;Password=APICX2504
+    networks:
+      - apicaixa-network
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: BDCaixa
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: APICX2504
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - apicaixa-network
+
+volumes:
+  pgdata:
+
+networks:
+  apicaixa-network:
