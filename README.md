@@ -1,54 +1,51 @@
 # APICaixa
 
-API para gerenciamento de contas bancárias fictícias, construída com .NET 8, arquitetura Clean Architecture e persistência em PostgreSQL.
+API para gerenciamento de contas bancárias fictícias, desenvolvida com .NET 8, utilizando o padrão Clean Architecture e persistência em PostgreSQL.
 
 ## 🧰 Tecnologias Utilizadas
 
 - ASP.NET Core 8
 - PostgreSQL
 - Entity Framework Core
-- Docker e Docker Compose
-- xUnit e Moq (para testes)
+- Docker & Docker Compose
+- xUnit + Moq (para testes unitários)
 
 ---
 
-## 🚀 Como rodar o projeto localmente
+## 🚀 Como Rodar o Projeto
 
-### 2. Ajuste da Connection String (opcional)
+### 🔧 Requisitos
+- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-Se for rodar fora do Docker, abra o arquivo:
+### 🔁 Rodar com Docker (recomendado)
 
 ```bash
-APICaixa/appsettings.json
+docker compose up --build
 ```
+A aplicação estará disponível em:
+http://localhost:8080/swagger
+⚠️ A primeira execução pode demorar um pouco para baixar as imagens e configurar o banco de dados.
 
-E ajuste a `ConnectionStrings:BDCaixa` para refletir os dados do seu PostgreSQL local, exemplo:
+## ⚙️ Rodar localmente (sem Docker)
 
-```json
+### Ajuste a connection string no arquivo APICaixa/appsettings.json:
+```bash
 "ConnectionStrings": {
   "BDCaixa": "Host=localhost;Port=5432;Database=BDCaixa;Username=postgres;Password=APICX2504"
 }
 ```
-
-### 3. Executar com Docker (recomendado)
-
-Certifique-se de ter o Docker e o Docker Compose instalados.
-
-Execute os comandos:
-
+Execute as migrations (opcional, caso ainda não existam):
 ```bash
-docker-compose up --build
+dotnet ef database update --project APICaixa
+```
+Rode o projeto com:
+```bash
+dotnet run --project APICaixa
 ```
 
-A API será acessível via:
 
-```
-http://localhost:8080/swagger
-```
-
-> ⚠️ A primeira vez pode demorar um pouco, pois o Docker irá baixar as imagens e criar o banco de dados.
-
----
 
 ## 🗃️ Banco de Dados
 
@@ -92,10 +89,24 @@ Utilizamos:
 ```
 
 ---
+## 📌 Funcionalidades Implementadas
 
+Cadastro de contas bancárias com saldo inicial de R$1000
+Consulta de contas com filtros por nome e documento
+Inativação de contas com registro de log
+Transferência entre contas ativas com saldo disponível
+Documentação da API via Swagger
+
+
+---
 ## 📄 Licença
 
 Este projeto é de uso acadêmico e demonstrativo.
 
+
+---
+## 👨💻 Autor
+Juliano
+Email: julianops79@gmail.com
 
 

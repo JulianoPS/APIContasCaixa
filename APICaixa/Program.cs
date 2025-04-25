@@ -39,7 +39,7 @@ builder.Services.AddSwaggerGen(c =>
                       "3. Desativação de conta (registro com log)\n" +
                       "4. Transferência entre contas ativas com saldo suficiente\n\n" +
                       "⚠️ **Atenção**: Não há autenticação/autorização implementada.\n" +
-                      "📂 Repositório GitHub: [link_do_repositorio_aqui]",
+                      "📂 Repositório GitHub: https://github.com/JulianoPS/APIContasCaixa",
         Contact = new OpenApiContact
         {
             Name = "Juliano",
@@ -53,7 +53,21 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<BDContexto>();
+    try
+    {
+        db.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Ocorreu um erro ao aplicar as migrations no banco de dados.");
+        Console.WriteLine(ex.Message);
+    }
+}
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
